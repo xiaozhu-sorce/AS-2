@@ -11,7 +11,7 @@ public class CrimeLab {
 
     private List<Crime> mCrimes;
 
-    private static CrimeLab get(Context context){
+    private static CrimeLab get(Context context){//创建单例
         if (sCrimeLab==null){
             sCrimeLab=new CrimeLab(context);
         }
@@ -20,7 +20,7 @@ public class CrimeLab {
 
     private CrimeLab(Context context){
         mCrimes=new ArrayList<>();
-        for(int i=0;i<100;i++){
+        for(int i=0;i<100;i++){//生成100个crime
             Crime crime=new Crime();
             crime.setTitle("Crime #"+i);
             crime.setSolved(i%2==0);
