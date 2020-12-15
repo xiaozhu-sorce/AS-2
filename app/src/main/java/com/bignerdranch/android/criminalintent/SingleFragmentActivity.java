@@ -1,14 +1,13 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public abstract class SingleFragmentActivity extends AppCompatActivity {
+public abstract class SingleFragmentActivity extends AppCompatActivity {//添加了一个通用超类
 
-    protected abstract Fragment creatFragment();
+    protected abstract Fragment creatFragment();//为了实例化新的fragment，新增了名为creatFragment()的抽象方法;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
