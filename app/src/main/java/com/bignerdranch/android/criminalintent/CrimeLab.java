@@ -11,7 +11,7 @@ public class CrimeLab {
 
     private List<Crime> mCrimes;//变量声明语句。
 
-    private static CrimeLab get(Context context){//创建单例
+    protected static CrimeLab get(Context context){//创建单例
         if (sCrimeLab==null){
             sCrimeLab=new CrimeLab(context);
         }

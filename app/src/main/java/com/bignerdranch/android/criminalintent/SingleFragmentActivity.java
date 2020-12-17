@@ -14,6 +14,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {//添加
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
 
+        //以下FragmentTransaction相关代码段!!!!
         FragmentManager fm = getSupportFragmentManager(); //获取FragmentManager类
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);//获取一个fragment事务
 

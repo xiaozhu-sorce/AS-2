@@ -14,7 +14,8 @@ import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class CrimeFragment extends Fragment {
+public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这2个方法必须是public的，因为需要被任何activity调用.
+    //你必须创建一个Fragment的子类，这个子类是类似Activity的。它包含onCrate(),onStart(),onPause(),onStop()。我在在这里只实现onCreate()和 onCreateView()就足够了。。
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
@@ -26,7 +27,7 @@ public class CrimeFragment extends Fragment {
     }
 
     public View onCreatView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
-        View v=inflater.inflate(R.layout.fragment_crime,container,false);
+        View v=inflater.inflate(R.layout.fragment_crime,container,false);//与Activity进行交互的代码片段
 
         mTitleField=(EditText)v.findViewById(R.id.crime_title);
         mTitleField.addTextChangedListener(new TextWatcher() {
