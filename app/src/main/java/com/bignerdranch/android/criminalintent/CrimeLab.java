@@ -1,7 +1,6 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -20,10 +19,12 @@ public class CrimeLab {
 
     private CrimeLab(Context context){
         mCrimes=new ArrayList<>();//实例化
-        for(int i=0;i<100;i++){//生成100个crime
+        for(int i=1;i<=100;i++){//生成100个crime
             Crime crime=new Crime();
             crime.setTitle("Crime #"+i);
             crime.setSolved(i%2==0);
+            crime.setRequiresPolice(i%10==0);//括号内的是什么意思
+            //每隔10个就是警方需介入的crime
             mCrimes.add(crime);
         }
     }

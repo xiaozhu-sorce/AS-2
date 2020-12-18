@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 public class CrimeActivity extends SingleFragmentActivity {
 
     @Override
-    protected Fragment creatFragment(){ //获取FragmentManager
+    protected Fragment createFragment(){ //获取FragmentManager
         return new CrimeFragment();
     }
 }
