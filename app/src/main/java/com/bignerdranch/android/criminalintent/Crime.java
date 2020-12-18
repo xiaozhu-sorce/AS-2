@@ -1,5 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
+import android.widget.ImageView;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -35,7 +37,7 @@ public class Crime {
         mDate = date;
     }
 
-    public Boolean getSolved() {
+    public Boolean isSolved() {
         return mSolved;
     }
 
