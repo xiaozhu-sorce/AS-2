@@ -21,12 +21,14 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
 
-    public void onCreat(Bundle savedInstanceState){
+    @Override
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mCrime=new Crime();
     }
 
-    public View onCreatView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         View v=inflater.inflate(R.layout.fragment_crime,container,false);//与Activity进行交互的代码片段
 
         mTitleField=(EditText)v.findViewById(R.id.crime_title);
