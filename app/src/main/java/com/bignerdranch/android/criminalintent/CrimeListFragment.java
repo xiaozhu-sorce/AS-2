@@ -88,10 +88,13 @@ public class CrimeListFragment extends Fragment {
             mSolvedImageView=(ImageView)itemView.findViewById(R.id.crime_solved);
         }
 
-        public void bind(Crime crime){           mCrime=crime;
+        public void bind(Crime crime){
+            mCrime=crime;
             mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getDate().toString());
             mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
+            Date d=mCrime.getDate();
+            DateFormat fm = new SimpleDateFormat("EEE， MMM dd， yyyy", Locale.ENGLISH);
+            mDateTextView.setText(fm.format(d).toString());
         }
         @Override
         public void onClick(View v){
