@@ -26,6 +26,7 @@ import java.util.Locale;
 public class CrimeListFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
+    private static int mCrimeIndex;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceStatew){
@@ -67,7 +68,8 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public  void onClick(View view){
-            Intent intent=new Intent(getActivity(),CrimeActivity.class);
+            Intent intent=CrimeActivity.newIntent(getActivity(),mCrime.getId());
+            mCrimeIndex=getAdapterPosition();
             startActivity(intent);
         }
     }
@@ -147,11 +149,21 @@ public class CrimeListFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI(){
         CrimeLab crimeLab=CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
 
-        mAdapter = new CrimeAdapter(crimes);
-        mCrimeRecyclerView.setAdapter(mAdapter);
+        if (mAdapter==null){
+            mAdapter = new CrimeAdapter(crimes);
+            mCrimeRecyclerView.setAdapter(mAdapter);
+        }else {
+            mAdapter.notifyItemChanged(mCrimeIndex);
+        }
     }
 }

@@ -14,17 +14,30 @@ import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.UUID;
+
 public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这2个方法必须是public的，因为需要被任何activity调用.
     //你必须创建一个Fragment的子类，这个子类是类似Activity的。它包含onCrate(),onStart(),onPause(),onStop()。我在在这里只实现onCreate()和 onCreateView()就足够了。。
+    private static final String ARG_CRIME_ID="crime_id";
+
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
 
+    public static CrimeFragment newInstance(UUID crimeId){
+        Bundle args=new Bundle();
+        args.putSerializable(ARG_CRIME_ID,crimeId);
+
+        CrimeFragment fragment=new CrimeFragment();
+        fragment.setArguments(args);
+        return  fragment;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mCrime=new Crime();
+        UUID crimeId=(UUID)getArguments().getSerializable(ARG_CRIME_ID);
+        mCrime=CrimeLab.get(getActivity()).getCrime(crimeId);
     }
 
     @Override
@@ -32,6 +45,7 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
         View v=inflater.inflate(R.layout.fragment_crime,container,false);//与Activity进行交互的代码片段
 
         mTitleField=(EditText)v.findViewById(R.id.crime_title);
+        mTitleField.setText(mCrime.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -55,6 +69,7 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
 
 
         mSolvedCheckBox=(CheckBox)v.findViewById(R.id.crime_solved);
+        mSolvedCheckBox.setChecked(mCrime.isSolved());
         mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
