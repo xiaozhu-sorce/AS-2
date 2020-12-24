@@ -31,7 +31,7 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
 
         CrimeFragment fragment=new CrimeFragment();
         fragment.setArguments(args);
-        return  fragment;
+        return fragment;
     }
     @Override
     public void onCreate(Bundle savedInstanceState){
