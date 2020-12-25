@@ -3,6 +3,8 @@ package com.bignerdranch.android.criminalintent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,9 @@ public class CrimePagerActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<Crime> mCrimes;
 
+    private Button btn_first;
+    private Button btn_last;
+
     public static Intent newIntent(Context packageContext, UUID crimeId){
         Intent intent=new Intent(packageContext,CrimePagerActivity.class);
         intent.putExtra(EXTRA_CRIME_ID,crimeId);
@@ -33,6 +38,22 @@ public class CrimePagerActivity extends AppCompatActivity {
         UUID crimeId=(UUID)getIntent().getSerializableExtra(EXTRA_CRIME_ID);
 
         mViewPager=(ViewPager)findViewById(R.id.crime_view_pager);
+
+        btn_first=(Button)findViewById(R.id.btn_to_first);
+        btn_last=(Button)findViewById(R.id.btn_to_last);
+
+        btn_first.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(0);
+            }
+        });
+        btn_last.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(mCrimes.size()-1);
+            }
+        });
 
         mCrimes=CrimeLab.get(this).getCrimes();//从CrimeLab中获取数据集，然后获取Activity的FragmentManager实例;
         FragmentManager fragmentManager=getSupportFragmentManager();
@@ -57,5 +78,33 @@ public class CrimePagerActivity extends AppCompatActivity {
                 break;
             }
         }
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position==0){
+                    btn_first.setVisibility(View.VISIBLE);
+                    btn_last.setVisibility(View.INVISIBLE);
+                }
+                else if (position==mCrimes.size()-1){
+                    btn_first.setVisibility(View.INVISIBLE);
+                    btn_last.setVisibility(View.VISIBLE);
+                }
+                else {
+                    btn_first.setVisibility(View.VISIBLE);
+                    btn_last.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }

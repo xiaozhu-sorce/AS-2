@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.viewpager.widget.ViewPager
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/crime_view_pager"
+<LinearLayout    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</androidx.viewpager.widget.ViewPager>
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <androidx.viewpager.widget.ViewPager
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/crime_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/btn_to_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to_first"
+            android:layout_gravity="bottom|left"/>
+        <Button
+            android:id="@+id/btn_to_last"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to_last"
+            android:layout_gravity="bottom|right" />
+    </FrameLayout>
+
+</LinearLayout>
