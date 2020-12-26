@@ -1,5 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,11 +14,16 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import java.util.Date;
 import java.util.UUID;
 
 public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这2个方法必须是public的，因为需要被任何activity调用.
     //你必须创建一个Fragment的子类，这个子类是类似Activity的。它包含onCrate(),onStart(),onPause(),onStop()。我在在这里只实现onCreate()和 onCreateView()就足够了。。
     private static final String ARG_CRIME_ID="crime_id";
+    private static final String DIALOG_DATE="DialogDate";
+
+    private static final int REQUEST_DATE=0;
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -62,8 +69,17 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
         });
 
         mDateButton=(Button) v.findViewById(R.id.crime_date);
-        mDateButton.setText(mCrime.getDate().toString());
-        mDateButton.setEnabled(false);
+        updateDate();
+        mDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                DatePickerFragment dialog = DatePickerFragment
+                        .newInstance(mCrime.getDate());
+                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                dialog.show(manager, DIALOG_DATE);
+            }
+        });
 
 
         mSolvedCheckBox=(CheckBox)v.findViewById(R.id.crime_solved);
@@ -75,5 +91,23 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
             }
         });
         return v;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_DATE) {
+            Date date = (Date) data
+                    .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            mCrime.setDate(date);
+            updateDate();
+        }
+    }
+
+    private void updateDate() {
+        mDateButton.setText(mCrime.getDate().toString());
     }
 }

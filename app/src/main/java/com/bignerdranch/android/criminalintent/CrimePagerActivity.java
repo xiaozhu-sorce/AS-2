@@ -83,12 +83,12 @@ public class CrimePagerActivity extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position==0){
-                    btn_first.setVisibility(View.VISIBLE);
-                    btn_last.setVisibility(View.INVISIBLE);
-                }
-                else if (position==mCrimes.size()-1){
                     btn_first.setVisibility(View.INVISIBLE);
                     btn_last.setVisibility(View.VISIBLE);
+                }
+                else if (position==mCrimes.size()-1){
+                    btn_first.setVisibility(View.VISIBLE);
+                    btn_last.setVisibility(View.INVISIBLE);
                 }
                 else {
                     btn_first.setVisibility(View.VISIBLE);
