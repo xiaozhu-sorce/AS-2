@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import java.text.DateFormat;
 import java.text.FieldPosition;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -122,6 +123,7 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
                     .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDate();
+            updateTime();
         }
         if (requestCode==REQUEST_TIME){
             Date date =(Date) data
@@ -133,10 +135,12 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
     }
 
     private void updateDate() {
-        mDateButton.setText(mCrime.getDate().toString());
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        mDateButton.setText(sdf.format(mCrime.getDate()).toString());
     }
 
     private void updateTime(){
-        mTimeButton.setText((CharSequence) mCrime.getDate());
+        SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
+        mTimeButton.setText(sdf.format(mCrime.getDate()).toString());
     }
 }

@@ -3,4 +3,5 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:calendarViewShown="false">
+    //不同版本的Android的DatePicker控件外观可能有所不同，比如Android4.4上是滚轮的形式，在7.0上则是一个日历视图。为了避免在4.4等低版本上显示出日历视图占用太多空间，可以将android:calendarViewShown属性设为fasle。
 </TimePicker>

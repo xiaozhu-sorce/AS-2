@@ -61,7 +61,7 @@ public class CrimeListFragment extends Fragment {
             mTitleTextView.setText(mCrime.getTitle());
             
             Date d=mCrime.getDate();
-            DateFormat fm = new SimpleDateFormat("EEE， MMM dd， yyyy", Locale.ENGLISH);
+            SimpleDateFormat fm = new SimpleDateFormat("EEE， MMM dd， yyyy", Locale.ENGLISH);
             mDateTextView.setText(fm.format(d).toString());
             mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
         }
