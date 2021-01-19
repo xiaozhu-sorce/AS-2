@@ -81,11 +81,8 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager manager = getFragmentManager();
-                DatePickerFragment dialog = DatePickerFragment
-                        .newInstance(mCrime.getDate());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
-                dialog.show(manager, DIALOG_DATE);
+                Intent intent=new Intent(getActivity(),DateActivity.class);
+                startActivityForResult(intent,REQUEST_DATE);
             }
         });
 
@@ -101,6 +98,7 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
                 dialog.show(manager,DIALOG_TIME);
             }
         });
+
         mSolvedCheckBox=(CheckBox)v.findViewById(R.id.crime_solved);
         mSolvedCheckBox.setChecked(mCrime.isSolved());
         mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
@@ -109,6 +107,7 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
                 mCrime.setSolved(isChecked);
             }
         });
+
         return v;
     }
 

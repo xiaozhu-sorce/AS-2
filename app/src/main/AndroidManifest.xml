@@ -18,5 +18,4 @@
         <activity android:name=".CrimePagerActivity">
         </activity>
     </application>
-
 </manifest>
