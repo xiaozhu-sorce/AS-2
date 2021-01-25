@@ -10,17 +10,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class DatePickerFragment extends DialogFragment {
+public class DatePickerFragment extends Fragment {
     public static final String EXTRA_DATE="com.bignerdranch.android.criminalintent.date";
 
     private static final String ARG_DATE="date";
 
     private DatePicker mDatePicker;
+    private Button mOk;
 
     public static DatePickerFragment newInstance(Date date){
         Bundle args=new Bundle();
@@ -32,11 +37,10 @@ public class DatePickerFragment extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        Date date=(Date)getArguments().getSerializable(ARG_DATE);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,@Nullable Bundle savedInstanceState){
+
 
         Calendar calendar=Calendar.getInstance();
-        calendar.setTime(date);
         int year=calendar.get(Calendar.YEAR);
         int month=calendar.get(Calendar.MONTH);
         int day=calendar.get(Calendar.DAY_OF_MONTH);
@@ -47,9 +51,8 @@ public class DatePickerFragment extends DialogFragment {
         mDatePicker.init(year,month,day,null);
         //采用了流接口的方式创建了AlertDialog实例。
 
-        Button Ok = (Button) v.findViewById(R.id.date_ok);
-        Ok.setOnClickListener(new View.OnClickListener(){
-
+        mOk = (Button) v.findViewById(R.id.date_ok);
+        mOk.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 int year=mDatePicker.getYear();

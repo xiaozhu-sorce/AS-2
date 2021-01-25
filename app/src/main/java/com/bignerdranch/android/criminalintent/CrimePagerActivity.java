@@ -57,7 +57,7 @@ public class CrimePagerActivity extends AppCompatActivity {
 
         mCrimes=CrimeLab.get(this).getCrimes();//从CrimeLab中获取数据集，然后获取Activity的FragmentManager实例;
         FragmentManager fragmentManager=getSupportFragmentManager();
-        mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {//设置adapter为FragmentStatePagerAdapter的一个匿名实例。
+            mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {//设置adapter为FragmentStatePagerAdapter的一个匿名实例。
 
             @NonNull
             @Override

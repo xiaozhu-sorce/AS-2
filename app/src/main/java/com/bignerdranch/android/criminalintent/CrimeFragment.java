@@ -20,16 +20,17 @@ import java.text.DateFormat;
 import java.text.FieldPosition;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
 public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这2个方法必须是public的，因为需要被任何activity调用.
-    //你必须创建一个Fragment的子类，这个子类是类似Activity的。它包含onCrate(),onStart(),onPause(),onStop()。我在在这里只实现onCreate()和 onCreateView()就足够了。。
+    //你必须创建一个Fragment的子类，这个子类是类似Activity的。它包含onCrate(),onStart(),onPause(),onStop()。我在在这里只实现onCreate()和 onCreateView()就足够了。
     private static final String ARG_CRIME_ID="crime_id";
     private static final String DIALOG_DATE="DialogDate";
     private static final String DIALOG_TIME="DialogTime";
 
-    private static final int REQUEST_TIME=0;
+    private static final int REQUEST_TIME=1;
     private static final int REQUEST_DATE=0;
 
     private Crime mCrime;
@@ -94,7 +95,7 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
                 FragmentManager manager=getFragmentManager();
                 TimePickerFragment dialog=TimePickerFragment
                         .newInstance(mCrime.getDate());
-                dialog.setTargetFragment(CrimeFragment.this,REQUEST_TIME);
+                dialog.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
                 dialog.show(manager,DIALOG_TIME);
             }
         });
@@ -124,7 +125,7 @@ public class CrimeFragment extends Fragment {//onCreate()和onCreateView()。这
             updateDate();
             updateTime();
         }
-        if (requestCode==REQUEST_TIME){
+        if (requestCode == REQUEST_TIME){
             Date date =(Date) data
                     .getSerializableExtra(TimePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
