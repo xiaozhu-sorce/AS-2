@@ -19,14 +19,10 @@ public class CrimeLab {
 
     private CrimeLab(Context context){
         mCrimes=new ArrayList<>();//实例化
-        for(int i=1;i<=100;i++){//生成100个crime
-            Crime crime=new Crime();
-            crime.setTitle("Crime #"+i);
-            crime.setSolved(i%2==0);
-            crime.setRequiresPolice(i%10==0);//括号内的是什么意思
-            //每隔10个就是警方需介入的crime
-            mCrimes.add(crime);
-        }
+    }
+
+    public void addCrime(Crime c){
+        mCrimes.add(c);
     }
 
     public List<Crime> getCrimes(){//返回数组列表
